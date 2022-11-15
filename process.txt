@@ -1,0 +1,38 @@
+root-simon@rootsimon-VirtualBox:~/Desktop/pcap-test$ curl -O https://www.1001fonts.com/download/open-sans.zip
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 1140k  100 1140k    0     0  2981k      0 --:--:-- --:--:-- --:--:-- 2985k
+
+root-simon@rootsimon-VirtualBox:~/Desktop/pcap-test$ ping 1001fonts.com
+PING 1001fonts.com (54.39.182.171) 56(84) bytes of data.
+64 bytes from 1001fonts.com (54.39.182.171): icmp_seq=1 ttl=46 time=15.8 ms
+
+root-simon@rootsimon-VirtualBox:~/Desktop/pcap-test$ sudo tcpdump -w test1.pcap  -i enp0s3 -c 30 -v tcp and port 443 and host 10.0.2.15
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), snapshot length 262144 bytes
+30 packets captured
+118 packets received by filter
+0 packets dropped by kernel
+
+root-simon@rootsimon-VirtualBox:~/Desktop/pcap-test$ python3 pcap-parsing.py 
+/home/root-simon/.local/lib/python3.10/site-packages/dpkt/ip.py:140: UserWarning: IP.off is deprecated
+  deprecation_warning("IP.off is deprecated")
+Timestamp:  2022-11-14 22:04:23.552870
+IP: 10.0.2.15 -> 54.39.182.171   (len=60 ttl=64 DF=1 MF=0 offset=0) 
+
+Timestamp:  2022-11-14 22:04:23.565373
+IP: 54.39.182.171 -> 10.0.2.15   (len=44 ttl=64 DF=0 MF=0 offset=0) 
+
+Timestamp:  2022-11-14 22:04:23.565426
+IP: 10.0.2.15 -> 54.39.182.171   (len=40 ttl=64 DF=1 MF=0 offset=0) 
+
+Timestamp:  2022-11-14 22:04:23.671949
+IP: 10.0.2.15 -> 54.39.182.171   (len=557 ttl=64 DF=1 MF=0 offset=0) 
+
+Timestamp:  2022-11-14 22:04:23.672357
+IP: 54.39.182.171 -> 10.0.2.15   (len=40 ttl=64 DF=0 MF=0 offset=0) 
+
+Timestamp:  2022-11-14 22:04:23.688684
+IP: 54.39.182.171 -> 10.0.2.15   (len=2960 ttl=64 DF=0 MF=0 offset=0) 
+
+Timestamp:  2022-11-14 22:04:23.688702
+IP: 10.0.2.15 -> 54.39.182.171   (len=40 ttl=64 DF=1 MF=0 offset=0) 
